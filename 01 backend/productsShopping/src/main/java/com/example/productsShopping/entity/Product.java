@@ -35,7 +35,9 @@ public class Product {
     @NotNull(message = "Rate cannot be null")
     @DecimalMin(value = "0", message = "Rate must be at least 0")
     @DecimalMax(value = "5", message = "Rate must be less than or equal to 5")
-    private int rate;
+    private double rate;
+
+  
 
 
     @Column(columnDefinition = "TEXT")
@@ -46,7 +48,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonBackReference // Указывает Jackson, что это обратная ссылка, предотвращая бесконечную рекурсию при сериализации в JSON.
+    @JsonBackReference 
     private User user;
 
 

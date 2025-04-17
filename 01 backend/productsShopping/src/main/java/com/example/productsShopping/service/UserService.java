@@ -12,24 +12,9 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserRepository userRepository;
 
-//    public Object getUserProfile(String username) {
-//        User user = userRepository.findByUsername(username)
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//
-//        return new Object() {
-//            public String getUsername() {
-//                return user.getUsername();
-//            }
-//
-//            public String getEmail() {
-//                return user.getEmail();
-//            }
-//        };
-//    }
     public UserProfileDTO getUserProfile(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
         return new UserProfileDTO(user.getName(), user.getSurname(), user.getEmail(),user.getUsername());
     }
 }

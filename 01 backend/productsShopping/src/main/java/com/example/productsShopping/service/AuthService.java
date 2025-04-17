@@ -24,7 +24,6 @@ public class AuthService {
 
     @Transactional
     public String registerUser(RegisterRequest request) {
-        // Проверяем, существует ли уже имя пользователя или email
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new RuntimeException("Username is already taken!");
         }
@@ -33,7 +32,6 @@ public class AuthService {
             throw new RuntimeException("Email is already in use!");
         }
 
-        // Создаем нового пользователя
         User user = new User();
         user.setName(request.getName());
         user.setSurname(request.getSurname());
@@ -58,10 +56,9 @@ public class AuthService {
     }
 
     public void logoutUser() {
-        // Если требуется хранить аннулированные токены, добавьте текущий токен в список/базу
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
-            SecurityContextHolder.clearContext(); // Очистка контекста безопасности
+            SecurityContextHolder.clearContext(); 
         }
     }
 

@@ -48,10 +48,8 @@ public class ProductService {
         newProduct.setImageUrl(productDto.getImageUrl());
         newProduct.setUser(user);
 
-        // Save product to the database
         Product savedProduct = productRepository.save(newProduct);
 
-        // Add product to user
         user.getProducts().add(savedProduct);
         userRepository.save(user);
 
@@ -69,11 +67,9 @@ public class ProductService {
 
     @Transactional
     public ProductDto updateProduct(String username, Long productId, ProductDto productDto) {
-        // Find the product belonging to the specific user
         Product product = productRepository.findByIdAndUser_Username(productId, username)
                 .orElseThrow(() -> new RuntimeException("Product not found or access denied"));
 
-        // Update product fields
         product.setBrand(productDto.getBrand());
         product.setModel(productDto.getModel());
         product.setCategory(productDto.getCategory());
@@ -82,10 +78,8 @@ public class ProductService {
         product.setRate(productDto.getRate());
         product.setImageUrl(productDto.getImageUrl());
 
-        // Save the updated product
         Product updatedProduct = productRepository.save(product);
 
-        // Convert to DTO and return
         return mapToDto(updatedProduct);
     }
 

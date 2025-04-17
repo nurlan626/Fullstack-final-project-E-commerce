@@ -17,11 +17,9 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
         try {
-            // Попытка зарегистрировать пользователя
             String responseMessage = authService.registerUser(registerRequest);
             return ResponseEntity.ok(responseMessage);
         } catch (RuntimeException ex) {
-            // Возвращаем ошибку с сообщением из исключения
             return ResponseEntity.status(400).body(ex.getMessage());
         }
     }
@@ -29,11 +27,9 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@Valid @RequestBody LoginRequest loginRequest) {
         try {
-            // Попытка авторизовать пользователя
             String token = authService.loginUser(loginRequest);
             return ResponseEntity.ok(token);
         } catch (RuntimeException ex) {
-            // Возвращаем ошибку с сообщением из исключения
             return ResponseEntity.status(400).body(ex.getMessage());
         }
     }
@@ -41,13 +37,9 @@ public class AuthController {
     @PostMapping("/logout")
     public ResponseEntity<?> logoutUser() {
         try {
-            // Вызываем метод логаута в сервисе (если есть логика на сервере)
             authService.logoutUser();
-
-            // Отправляем клиенту успешный ответ
             return ResponseEntity.ok("Logout successful!");
         } catch (RuntimeException ex) {
-            // Обрабатываем исключение
             return ResponseEntity.status(400).body(ex.getMessage());
         }
     }

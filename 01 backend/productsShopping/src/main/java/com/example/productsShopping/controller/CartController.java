@@ -34,15 +34,12 @@ public class CartController {
             @PathVariable Long productId,
             @RequestParam(defaultValue = "1") Integer quantity
     ) {
-        // Проверка, что пользователь авторизован
         if (principal == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
 
-        // Логирование для отладки
         System.out.println("Добавление в корзину для пользователя: " + principal.getName());
 
-        // Добавление товара в корзину
         CartItemDto cartItem = cartService.addToCart(principal.getName(), productId, quantity);
 
         if (cartItem != null) {
@@ -90,9 +87,9 @@ public class CartController {
 
         try {
             cartService.clearCart(principal.getName());
-            return ResponseEntity.noContent().build(); // Возвращаем 204 No Content для успешного удаления
+            return ResponseEntity.noContent().build(); 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Обработка возможных исключений
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); 
         }
     }
 
