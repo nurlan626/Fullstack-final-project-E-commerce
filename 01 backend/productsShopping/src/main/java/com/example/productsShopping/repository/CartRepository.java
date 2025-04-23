@@ -13,7 +13,6 @@ import java.util.Optional;
 public interface CartRepository extends JpaRepository<CartItem, Long> {
     List<CartItem> findByUser_Username(String username);
     Optional<CartItem> findByUser_UsernameAndProduct_Id(String username, Long productId);
-
     void deleteByUser(User user);
 }
 

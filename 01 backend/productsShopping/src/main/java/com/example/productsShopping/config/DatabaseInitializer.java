@@ -1,7 +1,9 @@
-package com.example.productsShopping.repository;
+package com.example.productsShopping.config;
 
 import com.example.productsShopping.entity.Product;
 import com.example.productsShopping.entity.User;
+import com.example.productsShopping.repository.ProductRepository;
+import com.example.productsShopping.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ public class DatabaseInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         if (productRepository.count() == 0) {
-            User user = createUser("timur", "mammedov", "timur@example.com", "timur", "timur");
+            User user = createUser("anar", "anar", "anar@example.com", "anar", "anar");
 
             List<Product> products = Arrays.asList(
                 createProduct("Xiaomi", "Xiaomi Redmi Note 12", "Smartphones", "Affordable smartphone with AMOLED display", 249.99, 5, "https://smarton.az/storage/products/50170/smartfon-xiaomi-redmi-note-12-6-128gb-mint-green.webp", user),
@@ -49,7 +51,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 createProduct("Lenovo", "Lenovo Tab P11 Pro", "Tablets", "Premium Android tablet with OLED display", 499.99, 5, "https://p2-ofp.static.pub/fes/cms/2022/08/01/ycumf4z4oia108az0pq0kzvf17wdws486228.png", user),
                 createProduct("Realme", "Realme Pad", "Tablets", "Affordable tablet for entertainment", 199.99, 5, "https://www.savenearn.com.ph/cdn/shop/files/realme-pad-x-tablet-realme-save-n-earn-wireless.png?v=1684949277", user)
             );
-            
+
 
             productRepository.saveAll(products);
 
